@@ -9,9 +9,9 @@ int main()
 
     printw("alfonso kastel gandolfo"); //drukuje na ekranie znaki
 
-    refresh(); //odœwierza
+    refresh(); //odÅ›wieÅ¼a kappa
 
-    getch(); //czeka na klikniêcie i zwraca integer wciœniêtego klawisza
+    getch(); //czeka na klikniÄ™cie i zwraca integer wciÅ›niÄ™tego klawisza
 
     endwin(); //koniec ncurses
 
