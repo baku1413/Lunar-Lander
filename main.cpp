@@ -23,43 +23,64 @@
 
 
 
-
 #include <iostream>
 #include <ncurses/ncurses.h>
 using namespace std;
 int c;
-int x;
-int y;
+int x=10; //start pos
+int y=10;
+const int szerokosc = 80;
+const int wysokosc = 40;
+bool koniec = false;
 
 int main()
-
 {
+    initscr();
 
-initscr();
-clear();
-move(y , x);
-printw("%d" , x);
-refresh();
-c = getch();
-while((c = getch()) != KEY_F(1))
-	{	switch(c)
-		{	case KEY_LEFT:
-				x++;
+    while(c != 27) //ESC = exit
+    {
+            clear();
+            move(y,x);
+            refresh();
+            printw("A");
 
-				break;
-			case KEY_RIGHT:
-				x--;
+            c=getch();
+            switch(c)
+            {
+                case 119://w
+                    y--;
+                    main();
+                break;
+                case 97://a
+                    x--;
+                    main();
+                break;
+                case 115://s
+                    y++;
+                    main();
+                break;
+                case 100://d
+                    x++;
+                    main();
+                break;
+                default: break;
+            }
+    }
+    getch();
+    opad();
+    endwin();
+    return 0;
 
-				break;
-			case KEY_UP:
-				y++;
 
-				break;
-			case KEY_DOWN:
-				y--;
 
-				break;
-		}
-	}
 
+}
+
+
+void opad()
+{
+   while(koniec != false)
+   {
+   y++;
+   }
 }
