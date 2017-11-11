@@ -2,17 +2,21 @@
 #include <ncurses/ncurses.h>
 
 using namespace std;
-
+char c=0;
 int main()
 {
     initscr(); //inicjalizacja
 
     printw("alfonso kastel gandolfo"); //drukuje na ekranie znaki
 
-    refresh(); //odÅ›wieÅ¼a kappa
+    c = getch();
 
-    getch(); //czeka na klikniÄ™cie i zwraca integer wciÅ›niÄ™tego klawisza
+    printw("%d" , c);
 
+    refresh(); //odswieza kappa
+
+    getch(); //czeka na klikniêcie i zwraca integer wciœniêtego klawisza
+    main();
     endwin(); //koniec ncurses
 
     return 0;
