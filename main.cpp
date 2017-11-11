@@ -1,23 +1,65 @@
-#include <iostream>
-#include <ncurses/ncurses.h>
-
-using namespace std;
-char c=0;
-int main()
-{
+/*
     initscr(); //inicjalizacja
-
+    clear();  //czysci ekran
     printw("alfonso kastel gandolfo"); //drukuje na ekranie znaki
 
-    c = getch();
+    move(y , x);
 
-    printw("%d" , c);
+    c = getch();    //char c = nacisniety klawisz
+
+    printw("%d" , c);  //%d to parametr nie wiem jeszcze jaki //drukuje zawartoÅ›Ä‡ chara (c)
+
+    x++;
+    y++;
 
     refresh(); //odswieza kappa
 
-    getch(); //czeka na klikniêcie i zwraca integer wciœniêtego klawisza
+    getch(); //czeka na klikniÃªcie i zwraca integer wciÅ“niÃªtego klawisza
     main();
     endwin(); //koniec ncurses
 
-    return 0;
+    return 0; */
+
+
+
+
+
+#include <iostream>
+#include <ncurses/ncurses.h>
+using namespace std;
+int c;
+int x;
+int y;
+
+int main()
+
+{
+
+initscr();
+clear();
+move(y , x);
+printw("%d" , x);
+refresh();
+c = getch();
+while((c = getch()) != KEY_F(1))
+	{	switch(c)
+		{	case KEY_LEFT:
+				x++;
+
+				break;
+			case KEY_RIGHT:
+				x--;
+
+				break;
+			case KEY_UP:
+				y++;
+
+				break;
+			case KEY_DOWN:
+				y--;
+
+				break;
+		}
+	}
+
 }
