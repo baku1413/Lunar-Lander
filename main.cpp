@@ -20,14 +20,12 @@
 
     return 0; */
 
-
-
-
 #include <iostream>
 #include <ncurses/ncurses.h>
 #include <string>
+
 using namespace std;
-int c;
+int c=0;
 int x=10; //start pos
 int y=0;
 int moc = 0;
@@ -37,79 +35,80 @@ bool gra = true;
 int main()
 {
 
+            initscr();
 
+            curs_set(0);
+            noecho();
+            /*
             if (moc > 3)
             {
                 moc = 0;
-
             }
-            initscr();
+*/
             clear();
 
+    while(c != 27) //ESC = exit
+    {
+        if (moc > 3)
+            {
+                moc = 0;
+            }
+        c=getch();
+
+clear();
 
             move(y,x);
             printw("A");
             move(y+1, x);
-            printw("%d", naped);
+            printw("%s", naped.c_str());
+            move(y+1, x+1);
 
-            if (moc = 0)
+
+            if (moc == 0)
             {
-                string naped="o";
+                naped="";
 
             }
-            if (moc = 1)
+            if (moc == 1)
             {
-                string naped="o";
+                naped="o";
             }
-            if (moc = 2)
+            if (moc == 2)
             {
-                string naped="O";
+                naped="O";
             }
-            if (moc = 3)
+            if (moc == 3)
             {
-                string naped="0";
+                naped="8";
             }
 
 
-            c=getch();
 
-
-
-    while(c != 27) //ESC = exit
-    {
 
 
             switch(c)
             {
                 case 119://w
                     y--;
-                    main();
 
                 break;
                 case 97://a
                     x--;
-                    main();
 
                 break;
                 case 115://s
                     moc++;
-                    main();
 
                 break;
                 case 100://d
                     x++;
-                    main();
                 break;
                 default: break;
             }
     }
     getch();
-    main();
     endwin();
     return 0;
-
-
-
 
 }
 
