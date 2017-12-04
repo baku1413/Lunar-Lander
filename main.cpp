@@ -1,115 +1,84 @@
-/*
-    initscr(); //inicjalizacja
-    clear();  //czysci ekran
-    printw("alfonso kastel gandolfo"); //drukuje na ekranie znaki
-
-    move(y , x);
-
-    c = getch();    //char c = nacisniety klawisz
-
-    printw("%d" , c);  //%d to parametr nie wiem jeszcze jaki //drukuje zawartość chara (c)
-
-    x++;
-    y++;
-
-    refresh(); //odswieza kappa
-
-    getch(); //czeka na klikniêcie i zwraca integer wciœniêtego klawisza
-    main();
-    endwin(); //koniec ncurses
-
-    return 0; */
-
+#include <cstdlib>
 #include <iostream>
-#include <ncurses/ncurses.h>
-#include <string>
-
-using namespace std;
-int c=0;
-int x=10; //start pos
-int y=0;
-int moc = 0;
-string naped;
-bool gra = true;
+#include <stdlib.h>
 
 int main()
 {
+int i = 0;
 
-            initscr();
 
-            curs_set(0);
-            noecho();
-            /*
-            if (moc > 3)
-            {
-                moc = 0;
-            }
-*/
-            clear();
+    std::cout << ".-." << std::endl;
+    std::cout << ": :" << std::endl;
+    std::cout << ": :   .-..-.,-.,-. .--.  .--. " << std::endl;
+    std::cout << ": :__ : :; :: ,. :' .; ; : ..'" << std::endl;
+    std::cout << ":___.'`.__.':_;:_;.__,_; :_;  " << std::endl;
+    std::cout << "" << std::endl;
+    std::cout << "" << std::endl;
+    std::cout << ".-.                   .-.           " << std::endl;
+    std::cout << ": :                   : :           " << std::endl;
+    std::cout << ": :    .--.  ,-.,-. .-' : .--. .--. " << std::endl;
+    std::cout << ": :__ ' .; ; : ,. :' .; :' '_.': ..'" << std::endl;
+    std::cout << ":___.'.__,_; :_;:_;`.__.'`.__.':_;  " << std::endl;
+    std::cout << "" << std::endl;
+    std::cout << "" << std::endl;
 
-    while(c != 27) //ESC = exit
+    std::cout << "Bartosz Bak" << std::endl;
+    std::cout << "" << std::endl;
+
+
+    std::cout << "              :Wybierz tryb:            " << std::endl;
+    std::cout << "[1] Gra" << std::endl;
+    std::cout << "[2] Demo" << std::endl;
+    std::cout << "[3] Tabela Wynikow" << std::endl;
+    std::cout << "[4] Wyjscie" << std::endl;
+    std::cout << ">";
+    std::cin >> i;
+
+
+    if (i == 1)
     {
-        if (moc > 3)
-            {
-                moc = 0;
-            }
-        c=getch();
-
-clear();
-
-            move(y,x);
-            printw("A");
-            move(y+1, x);
-            printw("%s", naped.c_str());
-            move(y+1, x+1);
-
-
-            if (moc == 0)
-            {
-                naped="";
-
-            }
-            if (moc == 1)
-            {
-                naped="o";
-            }
-            if (moc == 2)
-            {
-                naped="O";
-            }
-            if (moc == 3)
-            {
-                naped="8";
-            }
-
-
-
-
-
-            switch(c)
-            {
-                case 119://w
-                    y--;
-
-                break;
-                case 97://a
-                    x--;
-
-                break;
-                case 115://s
-                    moc++;
-
-                break;
-                case 100://d
-                    x++;
-                break;
-                default: break;
-            }
+      //main_gra();
+      std::cout << "Lmaoo" << std::endl;
     }
-    getch();
-    endwin();
-    return 0;
+
+    if (i== 2)
+    {
+        //main_demo();
+        std::cout << "demoo" << std::endl;
+    }
+
+    if (i==3)
+    {
+        //main_wyniki();
+        std::cout << "XDDD" << std::endl;
+    }
+
+    if (i==4)
+    {
+        exit(0);
+    }
 
 }
 
+    /*
+    switch (i)
+    {
+    case 1:
+        std::cout << "Lmaoo" << std::endl;
+        //main_gra();
+    case 2:
+        std::cout << "demoo" << std::endl;
+        //main_demo();
+    case 3:
+        //main_wyniki();
+        std::cout << "XDDD" << std::endl;
+    case 4:
+        break;
+    }
 
+
+
+    return 0;
+}
+
+*/

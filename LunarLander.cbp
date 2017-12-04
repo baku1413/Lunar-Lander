@@ -39,6 +39,13 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="main.cpp" />
+		<Unit filename="main.h">
+			<Option compile="1" />
+			<Option link="1" />
+		</Unit>
+		<Unit filename="main_demo.cpp" />
+		<Unit filename="main_gra.cpp" />
+		<Unit filename="main_wyniki.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
