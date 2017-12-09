@@ -28,6 +28,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add option="-std=c++11" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -36,15 +37,17 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add option="-std=c++11" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="cpp11_utils.cpp" />
+		<Unit filename="cpp11_utils.h" />
+		<Unit filename="drawing.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="main.h">
-			<Option compile="1" />
-			<Option link="1" />
-		</Unit>
+		<Unit filename="main.h" />
 		<Unit filename="main_demo.cpp" />
 		<Unit filename="main_gra.cpp" />
+		<Unit filename="main_gra.h" />
 		<Unit filename="main_wyniki.cpp" />
 		<Extensions>
 			<code_completion />
