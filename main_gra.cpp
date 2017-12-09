@@ -25,7 +25,7 @@
 #include "drawing.h"
 #include "cpp11_utils.h"
 #include <cstdlib>
-
+#include <fstream>
 #include <iostream>
 #include <ncurses/ncurses.h>
 #include <string>
@@ -36,13 +36,15 @@ int x=10; //start pos
 int y=0;
 int moc = 0;
 
-string imie, score;
+string imie;
+string score;
 
 
 bool graa = true;
 
 int main_gra()
 {
+    fstream wyniki;
     // dane statku
     double ship_thrust = 0; // moc silinka
     double ship_position_y = 0; //pozycja statku y
@@ -153,10 +155,32 @@ int main_gra()
     }
     getch();
 
+
+    if (graa=false)
+{
+    koniec_gry(imie, score);
+}
+
     return 0;
 
 
 }
+
+void koniec_gry(string imie, string score)
+{
+ clear();
+ wynik.open("HOF.txt", ios::out);
+ std::cout<< "Podaj Nick:"; cin>>imie;
+ wynik<<imie;
+ wynik<<"  twoj wynik:";
+ wynik<<score<<endl;
+ wynik.close();
+}
+
+
+
+
+
 
 
 

@@ -43,6 +43,7 @@
 		<Unit filename="cpp11_utils.cpp" />
 		<Unit filename="cpp11_utils.h" />
 		<Unit filename="drawing.h" />
+		<Unit filename="koniec.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="main.h" />
 		<Unit filename="main_demo.cpp" />
