@@ -24,6 +24,7 @@
 #include "main_gra.h"
 #include "drawing.h"
 #include "cpp11_utils.h"
+#include <cstdlib>
 
 #include <iostream>
 #include <ncurses/ncurses.h>
@@ -33,8 +34,10 @@ using namespace std;
 int c=0;
 int x=10; //start pos
 int y=0;
-
 int moc = 0;
+
+string imie, score;
+
 
 bool graa = true;
 
@@ -42,8 +45,8 @@ int main_gra()
 {
     // dane statku
     double ship_thrust = 0; // moc silinka
-    double ship_position_y = 0;
-    double ship_velocity = 0;
+    double ship_position_y = 0; //pozycja statku y
+    double ship_velocity = 0;   // prędkośći statku
     // ustawienia planety
     const double gravity = 0.9; // grawitacja znak na sekunde^2
 
@@ -52,15 +55,16 @@ int main_gra()
 
     initscr();
 
-    //curs_set(0);
+    curs_set(0);
     noecho();
     raw();
     nodelay(stdscr, true);
 
     clear();
 
+
     double start = Cpp11::TimeMs();
-    while(graa) //ESC = exit
+    while(graa)
     {
         double now = Cpp11::TimeMs();
         double delta = now - start;
@@ -85,33 +89,13 @@ int main_gra()
 
 
         clear();
-#if 0
-            move(y,x);
-            printw("A");
-            move(y+1, x);
-            printw("%s", naped.c_str());
-            move(y+1, x+1);
 
-
-            if (moc == 0)
-            {
-                naped="";
-
-            }
-            if (moc == 1)
-            {
-                naped="o";
-            }
-            if (moc == 2)
-            {
-                naped="O";
-            }
-            if (moc == 3)
-            {
-                naped="8";
-            }
-#else
         // ograniczenie wyswietlania statku
+        if (y<=-1) {
+            y=0;
+            draw_ship(x, y, ship_thrust);
+        }
+
         if (y >= 0 && y <= 40) {
 
 
@@ -120,15 +104,19 @@ int main_gra()
 
         int ground_level = 37;
 
-        for (int i = 0; i < 80; i=i+1) {
+        for (int i = 0; i < 80; i=i+1)
+        {
+
             mvprintw(ground_level, i, "=");
+            ground_level=( rand () % 36) + 35;
+
         }
 
-        if (y >= 30) {
+        if (y >= 37) {
             graa = false;
         }
 
-#endif
+
 
 
 
@@ -151,21 +139,25 @@ int main_gra()
                     x++;
                     break;
                 case 'q':
+
                     graa = false;
+
                     break;
                 default: break;
             }
 
-        move(40-1, 80-1);
+       // move(40-1, 80-1);
         refresh();
-                c = getch(); // nobreak - jesli nic nie nacisnieto to c == ERR
+        c = getch(); // nobreak - jesli nic nie nacisnieto to c == ERR
 
     }
     getch();
-    endwin();
+
     return 0;
 
+
 }
+
 
 
 void draw_ship(int x, int y, double thrust) {
