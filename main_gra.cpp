@@ -35,15 +35,46 @@ int c=0;
 int x=10; //start pos
 int y=0;
 int moc = 0;
-
+int ground_level = 37;
 string imie;
 string score;
 
 
 bool graa = true;
 
+/* Funkcja pytająca o imie gracza a następnie dopisująca jego uzyskany wynik
+zapisuje to potem na dysku w pliku HOF.txt */
+
+void koniec_gry(string imie, string score)
+{
+ clear();
+ fstream wyniki;
+ wyniki.open("HOF.txt", ios::out | ios::app);
+ move(0,0);
+ printw("alfonso kastel gandolfo");
+ cin>>imie;
+ wyniki<<imie;
+ wyniki<<"  twoj wynik:";
+ wyniki<<score<<endl;
+ wyniki.close();
+ main();
+}
+
+void rysuj_podloze(int ground_level)
+{
+
+        for (int i = 0; i < 80; i=i+1)
+        {
+            ground_level=37;
+            mvprintw(ground_level, i, "=");
+            ground_level=( rand () % 36) + 35;
+
+        }
+return;
+}
 int main_gra()
 {
+    rysuj_podloze(ground_level);
     fstream wyniki;
     // dane statku
     double ship_thrust = 0; // moc silinka
@@ -106,16 +137,20 @@ int main_gra()
 
         int ground_level = 37;
 
+
+
         for (int i = 0; i < 80; i=i+1)
         {
 
             mvprintw(ground_level, i, "=");
-            ground_level=( rand () % 36) + 35;
+            ground_level++;
+            mvprintw(ground_level, i, "=");
+            ground_level--;
 
         }
 
         if (y >= 37) {
-            graa = false;
+            koniec_gry(imie, score);
         }
 
 
@@ -153,43 +188,22 @@ int main_gra()
         c = getch(); // nobreak - jesli nic nie nacisnieto to c == ERR
 
     }
-    getch();
+    //getch();
 
 
-    if (graa=false)
-{
-    koniec_gry(imie, score);
-}
+
 
     return 0;
 
 
 }
 
-void koniec_gry(string imie, string score)
-{
- clear();
- wynik.open("HOF.txt", ios::out);
- std::cout<< "Podaj Nick:"; cin>>imie;
- wynik<<imie;
- wynik<<"  twoj wynik:";
- wynik<<score<<endl;
- wynik.close();
-}
-
-
-
-
-
-
-
-
 void draw_ship(int x, int y, double thrust) {
     mvprintw(y+0, x+0, "A");
-    // mala moc `
+    // mala moc
     // wiekasza niz mala v
     // srednia moc V
-    // doza moc W
+    // duza moc W
     // ogromna moc W
     //             V
     if (thrust > 0 && thrust < 0.5) {
