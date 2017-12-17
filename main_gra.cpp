@@ -29,6 +29,7 @@
 #include <iostream>
 #include <ncurses/ncurses.h>
 #include <string>
+#include <cstring>
 
 using namespace std;
 int c=0;
@@ -38,7 +39,16 @@ int moc = 0;
 int ground_level = 37;
 string imie;
 string score;
+int lol = 1;
+int platformax=10;
+int platformay=10;
+int wynik=0;
 
+
+const int platforma_wysokosc = 1;
+const char *face[] = {
+    "|____|"
+};
 
 bool graa = true;
 
@@ -51,7 +61,7 @@ void koniec_gry(string imie, string score)
  fstream wyniki;
  wyniki.open("HOF.txt", ios::out | ios::app);
  move(0,0);
- printw("alfonso kastel gandolfo");
+ printw("Podaj Nick");
  cin>>imie;
  wyniki<<imie;
  wyniki<<"  twoj wynik:";
@@ -60,6 +70,7 @@ void koniec_gry(string imie, string score)
  main();
 }
 
+/*
 void rysuj_podloze(int ground_level)
 {
 
@@ -72,9 +83,12 @@ void rysuj_podloze(int ground_level)
         }
 return;
 }
+*/
+
+
 int main_gra()
 {
-    rysuj_podloze(ground_level);
+    //rysuj_podloze(ground_level);
     fstream wyniki;
     // dane statku
     double ship_thrust = 0; // moc silinka
@@ -137,15 +151,35 @@ int main_gra()
 
         int ground_level = 37;
 
+        if (y == platformay && x == platformax)
+        {
+        wynik++;
+        score = to_string(wynik);
+
+        }
+
+
+while (lol == 1)
+{
+        platformay=(rand()%20) + 25;
+        platformax=(rand()%80);
+        lol = 0;
+}
+
+
+        mvprintw(0,72, "Wynik: %d",wynik);
+        mvprintw(platformay, platformax, "|____|");
+
 
 
         for (int i = 0; i < 80; i=i+1)
         {
 
             mvprintw(ground_level, i, "=");
-            ground_level++;
-            mvprintw(ground_level, i, "=");
-            ground_level--;
+            ground_level=( rand () % 36) + 35;
+            platformay=(rand()%20) + 25;
+            platformax=(rand()%80);
+
 
         }
 
@@ -200,6 +234,7 @@ int main_gra()
 
 void draw_ship(int x, int y, double thrust) {
     mvprintw(y+0, x+0, "A");
+
     // mala moc
     // wiekasza niz mala v
     // srednia moc V
