@@ -110,9 +110,29 @@ int main_gra()
     clear();
 
 
+    if (y == platformay && x+1 == platformax)
+        {
+        wynik++;
+        }
+
+        if (y == platformay && x+2 == platformax)
+        {
+        wynik++;
+        }
+        if (y == platformay && x+3 == platformax)
+        {
+        wynik++;
+        }
+
+        if (y == platformay && x == platformax)
+        {
+        wynik++;
+        }
+
     double start = Cpp11::TimeMs();
     while(graa)
     {
+
         double now = Cpp11::TimeMs();
         double delta = now - start;
         if (delta < time_delta * 1000) {
@@ -145,29 +165,29 @@ int main_gra()
 
         if (y >= 0 && y <= 40) {
 
-
+            mvprintw(0,72, "Wynik: %d",wynik);
+            mvprintw(1,72, "X: %d",x);
+            mvprintw(2,72, "y: %d",y);
+            mvprintw(3,72, "plX: %d",platformax);
+            mvprintw(4,72, "ply: %d",platformay);
             draw_ship(x, y, ship_thrust);
         }
 
         int ground_level = 37;
 
-        if (y == platformay && x == platformax)
-        {
-        wynik++;
-        score = to_string(wynik);
-
-        }
 
 
-while (lol == 1)
+
+        /*
+    while (lol == 1)
 {
         platformay=(rand()%20) + 25;
         platformax=(rand()%80);
         lol = 0;
 }
+*/
 
 
-        mvprintw(0,72, "Wynik: %d",wynik);
         mvprintw(platformay, platformax, "|____|");
 
 
@@ -177,8 +197,9 @@ while (lol == 1)
 
             mvprintw(ground_level, i, "=");
             ground_level=( rand () % 36) + 35;
-            platformay=(rand()%20) + 25;
-            platformax=(rand()%80);
+
+
+            if(i==79) break;
 
 
         }
