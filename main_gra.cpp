@@ -20,7 +20,7 @@
     endwin(); //koniec ncurses
 
     return 0; */
-
+#include "main.h"
 #include "main_gra.h"
 #include "drawing.h"
 #include "cpp11_utils.h"
@@ -30,7 +30,7 @@
 #include <ncurses/ncurses.h>
 #include <string>
 #include <cstring>
-
+#include <ctime>
 using namespace std;
 int c=0;
 int x=10; //start pos
@@ -38,36 +38,29 @@ int y=0;
 int moc = 0;
 int ground_level = 37;
 string imie;
-string score;
-int lol = 1;
+int score;
 int platformax=10;
 int platformay=10;
 int wynik=0;
 
 
-const int platforma_wysokosc = 1;
-const char *face[] = {
-    "|____|"
-};
+
 
 bool graa = true;
 
 /* Funkcja pytająca o imie gracza a następnie dopisująca jego uzyskany wynik
 zapisuje to potem na dysku w pliku HOF.txt */
 
-void koniec_gry(string imie, string score)
+void koniec_gry(string imie, int score)
 {
- clear();
  fstream wyniki;
  wyniki.open("HOF.txt", ios::out | ios::app);
- move(0,0);
- printw("Podaj Nick");
- cin>>imie;
+ printf("Podaj Nick: ");
+ cin >> imie;
  wyniki<<imie;
  wyniki<<"  twoj wynik:";
  wyniki<<score<<endl;
  wyniki.close();
- main();
 }
 
 /*
@@ -95,7 +88,7 @@ int main_gra()
     double ship_position_y = 0; //pozycja statku y
     double ship_velocity = 0;   // prędkośći statku
     // ustawienia planety
-    const double gravity = 0.9; // grawitacja znak na sekunde^2
+    const double gravity = 2; // grawitacja znak na sekunde^2
 
     // ustawienia wyswietlania
     const double time_delta = 1.0/60;
@@ -107,31 +100,44 @@ int main_gra()
     raw();
     nodelay(stdscr, true);
 
+
+
     clear();
 
 
+
+    double start = Cpp11::TimeMs();
+    srand(time(NULL));
+    ground_level=( rand () % 30) + 35;
+    platformay=(rand()%20) + 25;
+    platformax=(rand()%80);
+
+    while(graa)
+   {
+
     if (y == platformay && x+1 == platformax)
         {
-        wynik++;
+        score++;
+        y=0;
         }
 
         if (y == platformay && x+2 == platformax)
         {
-        wynik++;
+        score++;
+        y=0;
         }
         if (y == platformay && x+3 == platformax)
         {
-        wynik++;
+        score++;
+        y=0;
         }
 
-        if (y == platformay && x == platformax)
+        if (y == platformay && x+4 == platformax)
         {
-        wynik++;
-        }
+        score++;
+        y=0;
 
-    double start = Cpp11::TimeMs();
-    while(graa)
-    {
+        }
 
         double now = Cpp11::TimeMs();
         double delta = now - start;
@@ -160,32 +166,27 @@ int main_gra()
         // ograniczenie wyswietlania statku
         if (y<=-1) {
             y=0;
+            ship_thrust=0;
+            ship_velocity=0;
             draw_ship(x, y, ship_thrust);
         }
 
         if (y >= 0 && y <= 40) {
 
-            mvprintw(0,72, "Wynik: %d",wynik);
-            mvprintw(1,72, "X: %d",x);
-            mvprintw(2,72, "y: %d",y);
-            mvprintw(3,72, "plX: %d",platformax);
-            mvprintw(4,72, "ply: %d",platformay);
+            mvprintw(0,72, "Wynik: %d",score);
+            mvprintw(1,72, "DEBUG:");
+            mvprintw(2,72, "X: %d",x);
+            mvprintw(3,72, "y: %d",y);
+            mvprintw(4,72, "plX: %d",platformax);
+            mvprintw(5,72, "ply: %d",platformay);
+            mvprintw(6,60, "szbksc: %d",ship_velocity);
+            mvprintw(7,60, "moc: %d",ship_thrust);
             draw_ship(x, y, ship_thrust);
         }
 
         int ground_level = 37;
 
 
-
-
-        /*
-    while (lol == 1)
-{
-        platformay=(rand()%20) + 25;
-        platformax=(rand()%80);
-        lol = 0;
-}
-*/
 
 
         mvprintw(platformay, platformax, "|____|");
@@ -196,8 +197,6 @@ int main_gra()
         {
 
             mvprintw(ground_level, i, "=");
-            ground_level=( rand () % 36) + 35;
-
 
             if(i==79) break;
 
@@ -205,10 +204,11 @@ int main_gra()
         }
 
         if (y >= 37) {
-            koniec_gry(imie, score);
+            break;
         }
 
 
+c = getch();
 
 
 
@@ -240,13 +240,14 @@ int main_gra()
 
        // move(40-1, 80-1);
         refresh();
-        c = getch(); // nobreak - jesli nic nie nacisnieto to c == ERR
+         // nobreak - jesli nic nie nacisnieto to c == ERR
 
     }
     //getch();
 
 
-
+endwin();
+            koniec_gry(imie, score);
 
     return 0;
 
