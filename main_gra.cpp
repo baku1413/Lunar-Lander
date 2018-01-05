@@ -36,12 +36,13 @@ int c=0;
 int x=10; //start pos
 int y=0;
 int moc = 0;
-int ground_level = 37;
+int ground_level = 0;
 string imie;
 int score;
 int platformax=10;
 int platformay=10;
 int wynik=0;
+string pomyslnosc = "  POMYSLNE LADOWANIE";
 
 
 
@@ -51,7 +52,7 @@ bool graa = true;
 /* Funkcja pytająca o imie gracza a następnie dopisująca jego uzyskany wynik
 zapisuje to potem na dysku w pliku HOF.txt */
 
-void koniec_gry(string imie, int score)
+void koniec_gry(string imie, int score, string pomyslnosc)
 {
  fstream wyniki;
  wyniki.open("HOF.txt", ios::out | ios::app);
@@ -59,8 +60,21 @@ void koniec_gry(string imie, int score)
  cin >> imie;
  wyniki<<imie;
  wyniki<<"  twoj wynik:";
- wyniki<<score<<endl;
+
+ wyniki<<score;
+ wyniki<<  pomyslnosc<<endl;
  wyniki.close();
+}
+
+
+void statek_rozbity()
+{
+
+mvprintw(19,30, "STATEK ROZBITY");
+mvprintw(22,32, "NACISNIJ Q");
+
+
+
 }
 
 /*
@@ -108,9 +122,11 @@ int main_gra()
 
     double start = Cpp11::TimeMs();
     srand(time(NULL));
-    ground_level=( rand () % 30) + 35;
-    platformay=(rand()%20) + 25;
-    platformax=(rand()%80);
+    ground_level=( rand () % 38) + 20;
+
+
+    //platformay=(rand()%30) + 35;
+    platformax=(rand()%72);
 
     while(graa)
    {
@@ -192,7 +208,9 @@ int main_gra()
         score=score+ship_thrust;
 
 
-        mvprintw(platformay, platformax, "|____|");
+        mvprintw(ground_level-1, platformax, "|____|");
+
+
 
 
 
@@ -206,7 +224,15 @@ int main_gra()
 
         }
 
-        if (y >= 37) {
+
+
+        if (y>=37 && ship_velocity>=5)
+        {
+            clear();
+            statek_rozbity();
+            pomyslnosc == "STATEK ROZBITY";
+        }
+        if (y >= 37 && ship_velocity<5) {
 
             break;
 
@@ -251,7 +277,7 @@ int main_gra()
 
 
 endwin();
-            koniec_gry(imie, score);
+            koniec_gry(imie, score, pomyslnosc);
 
     return 0;
 
