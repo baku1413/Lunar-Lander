@@ -114,7 +114,9 @@ int main_gra()
 
     while(graa)
    {
+       c = getch();
 
+/*
     if (y == platformay && x+1 == platformax)
         {
         score++;
@@ -138,7 +140,7 @@ int main_gra()
         y=0;
 
         }
-
+*/
         double now = Cpp11::TimeMs();
         double delta = now - start;
         if (delta < time_delta * 1000) {
@@ -173,20 +175,21 @@ int main_gra()
 
         if (y >= 0 && y <= 40) {
 
-            mvprintw(0,72, "Wynik: %d",score);
+            mvprintw(0,69, "Wynik: %d",score);
             mvprintw(1,72, "DEBUG:");
             mvprintw(2,72, "X: %d",x);
             mvprintw(3,72, "y: %d",y);
             mvprintw(4,72, "plX: %d",platformax);
             mvprintw(5,72, "ply: %d",platformay);
-            mvprintw(6,60, "szbksc: %d",ship_velocity);
-            mvprintw(7,60, "moc: %d",ship_thrust);
+            mvprintw(6,60, "szbksc: %f",ship_velocity);
+            mvprintw(7,60, "moc: %f",ship_thrust);
+            mvprintw(8,60, "delta: %f",delta);
             draw_ship(x, y, ship_thrust);
         }
 
         int ground_level = 37;
 
-
+        score=score+ship_thrust;
 
 
         mvprintw(platformay, platformax, "|____|");
@@ -196,7 +199,7 @@ int main_gra()
         for (int i = 0; i < 80; i=i+1)
         {
 
-            mvprintw(ground_level, i, "=");
+            mvprintw(ground_level, i, "-");
 
             if(i==79) break;
 
@@ -204,11 +207,12 @@ int main_gra()
         }
 
         if (y >= 37) {
+
             break;
+
         }
 
-
-c = getch();
+//
 
 
 
