@@ -1,25 +1,4 @@
-/*
 
-    initscr(); //inicjalizacja
-    clear();  //czysci ekran
-    printw("alfonso kastel gandolfo"); //drukuje na ekranie znaki
-
-    move(y , x);
-
-    c = getch();    //char c = nacisniety klawisz
-
-    printw("%d" , c);  //%d to parametr nie wiem jeszcze jaki //drukuje zawartość chara (c)
-
-    x++;
-    y++;
-
-    refresh(); //odswieza kappa
-
-    getch(); //czeka na klikniêcie i zwraca integer wciœniêtego klawisza
-    main();
-    endwin(); //koniec ncurses
-
-    return 0; */
 #include "main.h"
 #include "main_gra.h"
 #include "drawing.h"
@@ -31,28 +10,35 @@
 #include <string>
 #include <cstring>
 #include <ctime>
+
 using namespace std;
-int c=0;
-int x=10; //start pos
-int y=0;
-int moc = 0;
-int ground_level = 0;
-string imie;
-int score;
-int platformax=10;
-int platformay=10;
-int wynik=0;
-string pomyslnosc = "  POMYSLNE LADOWANIE";
+/* DEKLARACJA ZMIENNYCH */
+int c=0;                //wcisniety klawisz
+int x=(rand()%79) + 1;  //pozycja x
+int y=0;                //pozycja y
+int moc = 0;            //moc statku
+int ground_level = 0;   //poziom podloza
+int score;              //wynik
+int platformax=10;      //pozycja platformy x
+int platformay=10;      //pozycja platformy y
 
 
+string imie;            //imie gracza
+string pomyslnosc = "  STATEK ROZBITY"; //pomyslnosc zadania gracza
+
+bool graa = true;       //zmienna czy gra jest w trakcie
 
 
-bool graa = true;
-
-/* Funkcja pytająca o imie gracza a następnie dopisująca jego uzyskany wynik
-zapisuje to potem na dysku w pliku HOF.txt */
-
-void koniec_gry(string imie, int score, string pomyslnosc)
+/*! \brief Koniec gry
+ *
+ *  jesli nastapi przerwanie petli programu
+ *  program ma zapytac o Nick oraz zapisać go wraz z wynikiem do pliku
+ *
+ *  \param imie - nick gracza
+ *  \param score - wynik uzyskany przez gracza
+ *
+ */
+void koniec_gry(string imie, int score)
 {
  fstream wyniki;
  wyniki.open("HOF.txt", ios::out | ios::app);
@@ -62,36 +48,55 @@ void koniec_gry(string imie, int score, string pomyslnosc)
  wyniki<<"  twoj wynik:";
 
  wyniki<<score;
- wyniki<<  pomyslnosc<<endl;
+ wyniki<<pomyslnosc<<endl;
+ score==0;
  wyniki.close();
 }
 
-
+/*! \brief Wyświetla ekran rozbicia statku
+ *
+ *  jesli predkosc statku podczas ladowania jest wieksza lub równa 5 jednostek
+ *  wyswietlony ma zostac ekran z odpowiednim napisem i instrukcją
+ *
+ */
 void statek_rozbity()
 {
-
 mvprintw(19,30, "STATEK ROZBITY");
 mvprintw(22,32, "NACISNIJ Q");
-
-
-
 }
 
-/*
-void rysuj_podloze(int ground_level)
-{
+/** \brief głowna funckja gry
+ *
+ *  funkcja ta odpowiada za wyswietlanie wyniku wykrywanie kolizji z podlozem rysowanie platformy odczyt wcisnietych klawiszy itp
+ *  to glowny czlon programu
+ *
+ * \param ship_thrust-
+ * \param ship_position_y -
+ * \param ship_velocity -
+ * \param gravity -
+ * \param time_delta -
+ * \param start -
+ * \param ground_level -
+ * \param platformax -
+ * \param platformay-
+ * \param graa -
+ * \param c -
+ * \param now -
+ * \param delta -
+ * \param ship_thrust -
+ * \param y -
+ * \param x -
+ * \param score -
+ * \param pomyslnosc
+ * \param
+ * \param
+ * \param
+ * \param
 
-        for (int i = 0; i < 80; i=i+1)
-        {
-            ground_level=37;
-            mvprintw(ground_level, i, "=");
-            ground_level=( rand () % 36) + 35;
-
-        }
-return;
-}
-*/
-
+ *
+ *\return
+ *
+ */
 
 int main_gra()
 {
@@ -104,59 +109,26 @@ int main_gra()
     // ustawienia planety
     const double gravity = 2; // grawitacja znak na sekunde^2
 
-    // ustawienia wyswietlania
+
     const double time_delta = 1.0/60;
 
     initscr();
-
     curs_set(0);
     noecho();
     raw();
     nodelay(stdscr, true);
-
-
-
     clear();
-
-
 
     double start = Cpp11::TimeMs();
     srand(time(NULL));
     ground_level=( rand () % 38) + 20;
-
-
-    //platformay=(rand()%30) + 35;
-    platformax=(rand()%72);
+    platformax=(rand()%72);     //platformay=(rand()%30) + 35;
 
     while(graa)
    {
        c = getch();
 
-/*
-    if (y == platformay && x+1 == platformax)
-        {
-        score++;
-        y=0;
-        }
 
-        if (y == platformay && x+2 == platformax)
-        {
-        score++;
-        y=0;
-        }
-        if (y == platformay && x+3 == platformax)
-        {
-        score++;
-        y=0;
-        }
-
-        if (y == platformay && x+4 == platformax)
-        {
-        score++;
-        y=0;
-
-        }
-*/
         double now = Cpp11::TimeMs();
         double delta = now - start;
         if (delta < time_delta * 1000) {
@@ -189,6 +161,7 @@ int main_gra()
             draw_ship(x, y, ship_thrust);
         }
 
+
         if (y >= 0 && y <= 40) {
 
             mvprintw(0,69, "Wynik: %d",score);
@@ -203,62 +176,61 @@ int main_gra()
             draw_ship(x, y, ship_thrust);
         }
 
-        int ground_level = 37;
+       int ground_level = 37;
 
         score=score+ship_thrust;
-
-
         mvprintw(ground_level-1, platformax, "|____|");
 
 
 
 
-
+        /**< generowanie terenu
+         *   pętla for inicjuje zmienna i=0 , wykonuje ja do czasu kiedy bedzie ona mniejsza od 80 nastepnie inkrementuje po kazdym wykonaniu instrukjcji
+         */
         for (int i = 0; i < 80; i=i+1)
         {
-
             mvprintw(ground_level, i, "-");
-
             if(i==79) break;
-
-
         }
-
-
-
+        /**< detekcja predkosci i jesli jest zbyt duza to czysci ekran i wykonuje funkcje statek_rozbity */
         if (y>=37 && ship_velocity>=5)
         {
             clear();
             statek_rozbity();
-            pomyslnosc == "STATEK ROZBITY";
         }
+        /**< jesli ladowanie bylo wykonane z odpowiednia predkoscia to zmienia wartosc  */
         if (y >= 37 && ship_velocity<5) {
-
+            pomyslnosc == "POMYSLE LADOWANIE";
             break;
-
         }
 
-//
 
 
-
-
-            switch(c)
+/** \brief sterowanie statkiem
+ *
+ * \param c - wcisniety klawisz
+ * \param ship_thrust - moc napedu
+ * \param score - wynik gracza
+ *
+ */
+                switch(c)
             {
-                case 'w': // dokladnie to samo co 119://w
+                case 'w':
                     ship_thrust = ship_thrust + 0.2;
 
                     break;
                 case 97://a
                     x--;
+                    score=score+100;
 
                     break;
                 case 115://s
                     ship_thrust = ship_thrust - 0.2;
-                    ship_thrust = max(0.0, ship_thrust);
+                    ship_thrust = max(0.0, ship_thrust);       //naped nie mniejszy od zera
                     break;
                 case 100://d
                     x++;
+                    score=score+100;
                     break;
                 case 'q':
 
@@ -268,26 +240,39 @@ int main_gra()
                 default: break;
             }
 
-       // move(40-1, 80-1);
+
         refresh();
-         // nobreak - jesli nic nie nacisnieto to c == ERR
+
 
     }
-    //getch();
-
-
-endwin();
-            koniec_gry(imie, score, pomyslnosc);
+            endwin();
+            koniec_gry(imie, score);
 
     return 0;
 
 
 }
 
+/** \brief Rysowanie statku na ekranie wraz z jego napedem
+ *
+ *             mala moc: '
+ *      wieksza niz mala: v
+ *           srednia moc: V
+ *              duza moc: W
+ *           ogromna moc: W
+ *                        V
+ *
+ * \param thrust - moc napedu
+ * \param x - pozycja x
+ * \param y - pozycja y statku
+ * \return
+ *
+ */
+
 void draw_ship(int x, int y, double thrust) {
     mvprintw(y+0, x+0, "A");
 
-    // mala moc
+    // mala moc '
     // wiekasza niz mala v
     // srednia moc V
     // duza moc W

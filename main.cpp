@@ -13,6 +13,7 @@ int main()
 int i = 0;
 
     while (program) {
+
         std::cout << ".-." << std::endl;
         std::cout << ": :" << std::endl;
         std::cout << ": :   .-..-.,-.,-. .--.  .--. " << std::endl;

@@ -2,26 +2,71 @@
 #include "drawing.h"
 #include "cpp11_utils.h"
 #include <cstdlib>
-
 #include <iostream>
 #include <ncurses/ncurses.h>
 #include <string>
+#include <windows.h>
+#include <iostream>
+#include <ctime>
+int dy = 1;
+int dx = 10;
+int d=0;
+int e=0;
+bool demo =true;
 
 
-int main_demo() {
-
-
-        int ground_level = 37;
-
-        for (int i = 0; i < 80; i=i+1)
+    int main_demo()
+{
+    srand(time(NULL));
+    initscr();
+    refresh();
+    const double time_delta = 1.0/15;
+    double start = Cpp11::TimeMs();
+    mvprintw(dy,dx,"A");
+    mvprintw(36, 15, "|____|");
+    refresh();
+        while(demo)
         {
-
-            mvprintw(ground_level, i, "=");
-
-
+        srand(time(NULL));
+        clear();
+        mvprintw(36, 15, "|____|");
+        double now = Cpp11::TimeMs();
+        double delta = now - start;
+        if (delta < time_delta * 1000) {
+            Cpp11::SleepMs(time_delta * 1000 - delta);
         }
+        now = Cpp11::TimeMs();
+        delta = (now - start) / 1000;
+        start = now;
 
-    return 0;
+            mvprintw(dy,dx,"A");
+            refresh();
+            dy++;
+            dx++;
 
 
+
+    while(d<80)
+    {
+        d=d+1;
+        refresh();
+        mvprintw(37, d, "-");
+    }
+
+if (dy>37)
+{
+
+    mvprintw(19,30, "STATEK ROZBITY");
+    mvprintw(22,32, "NACISNIJ Q");
+    refresh();
+    Sleep(1000);
+    dx=( rand () % 2) + 30;
+    dy=1;
+    break;
+}
+
+
+}
+endwin();
+return 0;
 }
