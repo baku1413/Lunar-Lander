@@ -10,6 +10,7 @@
 #include <string>
 #include <cstring>
 #include <ctime>
+#include <windows.h>
 
 using namespace std;
 /* DEKLARACJA ZMIENNYCH */
@@ -158,15 +159,17 @@ int main_gra()
 
         if (y >= 0 && y <= 40) {
 
-            mvprintw(0,69, "Wynik: %d",score);
+            mvprintw(0,32, "Wynik: %d",score);
+            /*
             mvprintw(1,72, "DEBUG:");
             mvprintw(2,72, "X: %d",x);
             mvprintw(3,72, "y: %d",y);
             mvprintw(4,72, "plX: %d",platformax);
             mvprintw(5,72, "ply: %d",platformay);
-            mvprintw(6,60, "szbksc: %f",ship_velocity);
-            mvprintw(7,60, "moc: %f",ship_thrust);
-            mvprintw(8,60, "delta: %f",delta);
+            */
+            mvprintw(1,59, "szybkosc: %f",ship_velocity);
+            mvprintw(2,59, "moc statku: %f",ship_thrust);
+            //mvprintw(8,60, "delta: %f",delta);
             draw_ship(x, y, ship_thrust);
         }
 
@@ -174,7 +177,6 @@ int main_gra()
 
         score=score+ship_thrust;
         mvprintw(ground_level-1, platformax, "|____|");
-
 
 
 
@@ -192,8 +194,18 @@ int main_gra()
             clear();
             statek_rozbity();
         }
-        /**< jesli ladowanie bylo wykonane z odpowiednia predkoscia to zmienia wartosc  */
+        /**< jesli ladowanie bylo wykonane z odpowiednia predkoscia i w odpowiednim miejscu to odpowiednio zmmniejsza wynik */
         if (y >= 37 && ship_velocity<5) {
+            if (x==platformax+1 || x==platformax+2 || x==platformax+3 || x==platformax+4)
+            {
+                score=score/100;
+                clear();
+                mvprintw(19,25, "WYLADOWANO NA PLATFORMIE WYNIK ZMNIEJSZONY");
+                refresh();
+                Sleep(5000);
+                pomyslnosc == "POMYSLE LADOWANIE";
+                break;
+            }
             pomyslnosc == "POMYSLE LADOWANIE";
             break;
         }
