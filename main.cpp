@@ -2,10 +2,15 @@
 #include <iostream>
 #include <stdlib.h>
 #include "main_gra.h"
-
-
 #include "main.h"
 
+/** \brief menu g³ówne gry
+ * wybor kolejnych podprogramow za pomoca wpisywanej cyfry 1-4 lub q zeby wyjsc
+ * \param program - zmienna boolean sprawdza czy menu glowne jest w toku
+ * \param i - zmienna przechowujaca klawisz
+ * \return
+ *
+ */
 
 int main()
 {
@@ -66,26 +71,3 @@ int i = 0;
         }
     }
 }
-
-    /*
-    switch (i)
-    {
-    case 1:
-        std::cout << "Lmaoo" << std::endl;
-        //main_gra();
-    case 2:
-        std::cout << "demoo" << std::endl;
-        //main_demo();
-    case 3:
-        //main_wyniki();
-        std::cout << "XDDD" << std::endl;
-    case 4:
-        break;
-    }
-
-
-
-    return 0;
-}
-
-*/

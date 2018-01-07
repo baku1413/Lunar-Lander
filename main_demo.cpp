@@ -8,6 +8,28 @@
 #include <windows.h>
 #include <iostream>
 #include <ctime>
+
+
+
+/** \brief demo gry
+ *
+ * statek z litery A ma spasc na zmiemie i zostac rozbity
+ *
+ * \param dy - pozycja y statku w demie
+ * \param dx - pozycja x statku w demie
+ * \param d - kolejne iteracje petli dema
+ * \param demo - zmienna boolean czy demo aktualnie sie toczy
+ * \param time_delta - sta³a czasowa ustajalaca "framerate" jak szybko dziala program
+ * \param start - czas pobierany z funkcji TimeMs()
+ * \param now - czas
+ * \param delta - czas jaki uplynal od teraz czyli czas zmierzony wczesniej-czas teraz
+ *
+ * \return
+ *
+ */
+
+
+
 int dy = 1;
 int dx = 10;
 int d=0;
@@ -57,7 +79,7 @@ if (dy>37)
 {
 
     mvprintw(19,30, "STATEK ROZBITY");
-    mvprintw(22,32, "NACISNIJ Q");
+    mvprintw(22,34, "DEMO");
     refresh();
     Sleep(1000);
     dx=( rand () % 2) + 30;

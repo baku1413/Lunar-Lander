@@ -5,6 +5,14 @@
 #include "drawing.h"
 #include <fstream>
 #include <ncurses/ncurses.h>
+/** \brief podprogram drukujacy zawartosc pliku txt
+ * kiedy z menu przejdziemy do wyswietlenia wynikow program ma zczytac kazda linie z pliku HOF.txt i wyswietlic w konsoli
+ * \param pobrana linia - pobrana linia z pliku
+ * \param wynik - zmienna = pobranej lini, wypisywana w oknie konsoli
+ * \return
+ *
+ */
+
 using namespace std;
 int main_wyniki() {
     system("cls");
