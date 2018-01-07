@@ -36,7 +36,20 @@ int i = 0;
 
         std::cout << "Bartosz Bak" << std::endl;
         std::cout << "" << std::endl;
-
+        std::cout << "" << std::endl;
+        std::cout << "STEROWANIE:" << std::endl;
+        std::cout << "Klawisz W - zwiekszenie mocy silnikow" << std::endl;
+        std::cout << "Klawisz S - zmiejszenie mocy silnikow" << std::endl;
+        std::cout << "Klawisze A i D - sterowanie statkiem lewo prawo" << std::endl;
+        std::cout << "" << std::endl;
+        std::cout << "Zadaniem gracza jest wyladowanie na planecie lub platformie" << std::endl;
+        std::cout << "Pomyslne ladowanie jest wtedy gdy:" << std::endl;
+        std::cout << "statek dotyka terenu z predkoscia mniejsza niz 5" << std::endl;
+        std::cout << "Im mniejszy uzyskany wynik czyt. mniej zuzytego paliwa" << std::endl;
+        std::cout << "Tym lepszy wynik gracza" << std::endl;
+        std::cout << "Jesli ladowanie zostanie poprawnie na platformie" << std::endl;
+        std::cout << "Wynik jest dzielony przez liczbe 100" << std::endl;
+        std::cout << "" << std::endl;
 
         std::cout << "              :Wybierz tryb:            " << std::endl;
         std::cout << "[1] Gra" << std::endl;
