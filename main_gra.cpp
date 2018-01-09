@@ -204,12 +204,16 @@ int main_gra()
                 clear();
                 mvprintw(19,25, "WYLADOWANO NA PLATFORMIE WYNIK ZMNIEJSZONY");
                 refresh();
-                Sleep(5000);
+                Sleep(3300);
                 pomyslnosc = " POMYSLNE LADOWANIE";
 
                 break;
             }
             pomyslnosc = " POMYSLNE LADOWANIE";
+            clear();
+            mvprintw(19,25, "WYLADOWANO NA ZIEMII WYNIK BEZ ZMIAN");
+            refresh();
+            Sleep(3000);
             break;
         }
 
