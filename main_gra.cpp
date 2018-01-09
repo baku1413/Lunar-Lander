@@ -95,6 +95,7 @@ mvprintw(22,32, "NACISNIJ Q");
 
 int main_gra()
 {
+    graa=true;
     //rysuj_podloze(ground_level);
     fstream wyniki;
     // dane statku
@@ -192,6 +193,7 @@ int main_gra()
         if (y>=37 && ship_velocity>=5)
         {
             clear();
+            pomyslnosc = " STATEK ROZBITY";
             statek_rozbity();
         }
         /**< jesli ladowanie bylo wykonane z odpowiednia predkoscia i w odpowiednim miejscu to odpowiednio zmmniejsza wynik */
@@ -203,10 +205,11 @@ int main_gra()
                 mvprintw(19,25, "WYLADOWANO NA PLATFORMIE WYNIK ZMNIEJSZONY");
                 refresh();
                 Sleep(5000);
-                pomyslnosc == "POMYSLE LADOWANIE";
+                pomyslnosc = " POMYSLNE LADOWANIE";
+
                 break;
             }
-            pomyslnosc == "POMYSLE LADOWANIE";
+            pomyslnosc = " POMYSLNE LADOWANIE";
             break;
         }
 
