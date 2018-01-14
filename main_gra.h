@@ -2,8 +2,7 @@
 #define __MAIN_GRA_H
 
 
-/** \brief g³owna funckja gry
- *
+/*! \brief g³owna funckja gry
  *  funkcja ta odpowiada za wyswietlanie wyniku wykrywanie kolizji z podlozem rysowanie platformy odczyt wcisnietych klawiszy itp
  *  to glowny czlon programu
  *

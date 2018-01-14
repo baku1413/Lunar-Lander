@@ -11,8 +11,7 @@
 
 
 
-/** \brief demo gry
- *
+/*! \brief demo gry
  * statek z litery A ma spasc na zmiemie i zostac rozbity
  *
  * \param dy - pozycja y statku w demie

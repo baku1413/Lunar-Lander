@@ -8,3 +8,4 @@ qqaaasssdddaaddaawwddssaawwasdwasdwasdwasdwasdwasdwasdwa  twoj wynik:400 STATEK 
 asdf  twoj wynik:146 STATEK ROZBITY
 asdf  twoj wynik:669 POMYSLNE LADOWANIE
 asdfg  twoj wynik:969 STATEK ROZBITY
+dd  twoj wynik:2900 STATEK ROZBITY

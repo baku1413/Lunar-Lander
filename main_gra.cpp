@@ -31,7 +31,6 @@ bool graa = true;       //zmienna czy gra jest w trakcie
 
 
 /*! \brief Koniec gry
- *
  *  jesli nastapi przerwanie petli programu
  *  program ma zapytac o Nick oraz zapisać go wraz z wynikiem do pliku
  *
@@ -55,7 +54,6 @@ void koniec_gry(string imie, int score)
 }
 
 /*! \brief Wyświetla ekran rozbicia statku
- *
  *  jesli predkosc statku podczas ladowania jest wieksza lub równa 5 jednostek
  *  wyswietlony ma zostac ekran z odpowiednim napisem i instrukcją
  *
@@ -66,8 +64,7 @@ mvprintw(19,30, "STATEK ROZBITY");
 mvprintw(22,32, "NACISNIJ Q");
 }
 
-/** \brief głowna funckja gry
- *
+/*! \brief głowna funckja gry
  *  funkcja ta odpowiada za wyswietlanie wyniku wykrywanie kolizji z podlozem rysowanie platformy odczyt wcisnietych klawiszy itp
  *  to glowny czlon programu
  *
@@ -219,13 +216,7 @@ int main_gra()
 
 
 
-/** \brief sterowanie statkiem
- *
- * \param c - wcisniety klawisz
- * \param ship_thrust - moc napedu
- * \param score - wynik gracza
- *
- */
+
                 switch(c)
             {
                 case 'w':
@@ -266,7 +257,7 @@ int main_gra()
 
 }
 
-/** \brief Rysowanie statku na ekranie wraz z jego napedem
+/*! \brief Rysowanie statku na ekranie wraz z jego napedem
  *
  *             mala moc: '
  *      wieksza niz mala: v
